@@ -32,13 +32,19 @@
                         <label class="label">パスワード（確認用）</label>
                         <input type="password" class="input" id="passwordForCheck" name="passwordForCheck" required>
                         <input type="submit" class="button primary" value="作成する" >
+                        <c:if test="${!empty errorPassword}">
+                            <div class="error">${errorPassword}</div>
+                        </c:if>
+                        <c:if test="${!empty errorHalf}">
+                            <div class="error">${errorHalf}</div>
+                        </c:if>
                     </form>
                 </div>
                 <div class="authorization_navi">
                     <label class="authorization_text">すでにアカウントをお持ちですか？</label>
                     <form method="get" action="<%=request.getContextPath()%>/">
-						<a class="authorization_link marker" href="javascript:void(0)" onclick="this.parentNode.submit()">ログイン</a>
-					</form>
+                    <a class="authorization_link marker" href="javascript:void(0)" onclick="this.parentNode.submit()">ログイン</a>
+                    </form>
                 </div>
             </div>
         </main>
