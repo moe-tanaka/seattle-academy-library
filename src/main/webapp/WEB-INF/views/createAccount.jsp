@@ -33,11 +33,11 @@
                         <input type="password" class="input" id="passwordForCheck" name="passwordForCheck" required>
                         <input type="submit" class="button primary" value="作成する" >
                         <c:if test="${!empty errorPassword}">
-							 <div class="error">${errorPassword}</div>
-						</c:if>
-						<c:if test="${!empty errorHalf}">
-							 <div class="error">${errorHalf}</div>
-						</c:if>
+                        	<div class="error">${errorPassword}</div>
+                        </c:if>
+                        <c:if test="${!empty errorHalf}">
+                        	<div class="error">${errorHalf}</div>
+                        </c:if>
                     </form>
                 </div>
                 <div class="authorization_navi">
