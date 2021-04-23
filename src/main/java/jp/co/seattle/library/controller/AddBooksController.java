@@ -1,5 +1,6 @@
 package jp.co.seattle.library.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -42,6 +43,9 @@ public class AddBooksController {
      * @param title 書籍名
      * @param author 著者名
      * @param publisher 出版社
+     * @param publishDate 出版日
+     * @param isbn ISBN
+     * @param description 説明文
      * @param file サムネイルファイル
      * @param model モデル
      * @return 遷移先画面
@@ -52,6 +56,9 @@ public class AddBooksController {
             @RequestParam("title") String title,
             @RequestParam("author") String author,
             @RequestParam("publisher") String publisher,
+            @RequestParam("publishDate") String publishDate,
+            @RequestParam("isbn") String isbn,
+            @RequestParam("description") String description,
             @RequestParam("thumbnail") MultipartFile file,
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
@@ -61,6 +68,9 @@ public class AddBooksController {
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
         bookInfo.setPublisher(publisher);
+        bookInfo.setPublishDate(publishDate);
+        bookInfo.setIsbn(isbn);
+        bookInfo.setDescription(description);
 
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
@@ -83,14 +93,26 @@ public class AddBooksController {
                 return "addBook";
             }
         }
-
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            sdf.setLenient(false);
+            sdf.parse(publishDate);
+        } catch (Exception ex) {
+            model.addAttribute("errorDate", "出版日はYYYYMMDDの形式で入力してください");
+            return "addBook";
+        }
+        if (!(bookInfo.getIsbn().matches("([0-9]{10}|[0-9]{13})?"))) {
+            model.addAttribute("errorIsbn", "ISBNは10桁もしくは13桁の数字で入力してください");
+            return "addBook";
+        }
         // 書籍情報を新規登録する
         booksService.registBook(bookInfo);
 
         model.addAttribute("resultMessage", "登録完了");
 
         // TODO 登録した書籍の詳細情報を表示するように実装
-        //  詳細画面に遷移する
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(booksService.getBookid()));
+
         return "details";
     }
 
