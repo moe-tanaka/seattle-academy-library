@@ -39,6 +39,14 @@ public class DeleteBookController {
             @RequestParam("bookId") Integer bookId,
             Model model) {
         logger.info("Welcome delete! The client locale is {}.", locale);
+
+        //貸し出し可の場合のみ書籍情報を削除
+        if (booksService.isLending(bookId)) {
+            model.addAttribute("Message", "この本は貸し出し中のため、削除できません。");
+            model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+            return "details";
+        }
+
         booksService.deleteBook(bookId);
         model.addAttribute("bookList", booksService.getBookList());
         return "home";
