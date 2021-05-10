@@ -63,9 +63,8 @@ public class BulkRegistBooksController {
             Reader reader = new InputStreamReader(csv);
             BufferedReader br = new BufferedReader(reader);
             int rowCount = 1;
-            boolean flag = false;
+            boolean errorflag = false;
             String errorMessage = "";
-
             line = br.readLine();
 
             //while文は値を保持する
@@ -74,7 +73,9 @@ public class BulkRegistBooksController {
                 //必須項目が入力されているかチェックする。
                 if (detail[0].isEmpty() || detail[1].isEmpty() || detail[2].isEmpty() || detail[3].isEmpty()) {
                     errorMessage = +rowCount + "行目で必要な情報がありません";
-                    flag = true;
+                    errorflag = true;
+
+                    br.close();
                 }
                 if (detail[3].isEmpty()) {
                     try {
@@ -83,12 +84,12 @@ public class BulkRegistBooksController {
                         sdf.parse(detail[3]);
                     } catch (ParseException ex) {
                         errorMessage = +rowCount + "行目の出版日はYYYYMMDDの形式で入力してください";
-                        flag = true;
+                        errorflag = true;
                     }
                 }
-                if (detail[4].isEmpty() || detail[4] != null || !(detail[4].matches("([0-9]{10}|[0-9]{13})?"))) {
+                if (detail[4].isEmpty() || !(detail[4].matches("([0-9]{10}|[0-9]{13})?"))) {
                     errorMessage = +rowCount + "行目のISBNは10桁もしくは13桁の数字で入力してください";
-                    flag = true;
+                    errorflag = true;
 
                 }
 
@@ -104,7 +105,7 @@ public class BulkRegistBooksController {
             }
 
 
-            if (flag) {
+            if (errorflag) {
                 model.addAttribute("errorMessage", errorMessage);
                 return "bulkRegistBook";
             }
@@ -127,6 +128,6 @@ public class BulkRegistBooksController {
 
             return "bulkregistBook";
 
+        }
     }
-}
 }
