@@ -42,6 +42,14 @@
                         </c:if> <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
                     </a>
                 </div>
+                    <c:choose>
+                    <c:when test="${bookDetailsInfo.lending}">
+                        <p>貸出し中</p>
+                    </c:when>
+                    <c:otherwise>
+                        <p>貸出し可</p>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="content_right">
                 <div>
@@ -93,6 +101,11 @@
              <form method="post" action="deleteBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook">削除</button>
             </form>
+        </div>
+         <div>
+            <c:if test="${!empty lendingMessage}">
+                <div class="error">${lendingMessage}</div>
+            </c:if>
         </div>
     </main>
 </body>
