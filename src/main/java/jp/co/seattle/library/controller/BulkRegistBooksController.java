@@ -55,13 +55,12 @@ public class BulkRegistBooksController {
         logger.info("Welcome insertBooksbulk.java! The client locale is {}.", locale);
 
 
-        try {
+        try (InputStream csv = file.getInputStream();
+                Reader reader = new InputStreamReader(csv);
+                BufferedReader br = new BufferedReader(reader);) {
             List<BookDetailsInfo> bookcsv = new ArrayList<BookDetailsInfo>();
             String line = null;
 
-            InputStream csv = file.getInputStream();
-            Reader reader = new InputStreamReader(csv);
-            BufferedReader br = new BufferedReader(reader);
             int rowCount = 1;
             boolean errorflag = false;
             String errorMessage = "";
