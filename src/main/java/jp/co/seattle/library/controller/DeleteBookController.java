@@ -42,7 +42,6 @@ public class DeleteBookController {
 
         //貸し出し可の場合のみ書籍情報を削除
         if (booksService.isLending(bookId)) {
-            model.addAttribute("Message", "この本は貸し出し中のため、削除できません。");
             model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
             return "details";
         }

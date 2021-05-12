@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="resources/css/lightbox.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="resources/js/lightbox.js" /></script>
+<script src="resources/js/details.js" /></script>
 </head>
 <body class="wrapper">
     <header>
@@ -44,10 +45,10 @@
                 </div>
                     <c:choose>
                     <c:when test="${bookDetailsInfo.lending}">
-                        <p>貸出し中</p>
+                        <p id=status>貸出し中</p>
                     </c:when>
                     <c:otherwise>
-                        <p>貸出し可</p>
+                        <p id=status>貸出し可</p>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -90,22 +91,17 @@
         </div>
         <div class="edtDelBookBtn_box">
             <form method="post" action="rentBook">
-                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button>
+                <button type="submit" value="${bookDetailsInfo.bookId}"id=rent name="bookId" class="btn_rentBook">借りる</button>
             </form>
              <form method="post" action="returnBook">
-                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook">返す</button>
+                <button type="submit" value="${bookDetailsInfo.bookId}"id=return name="bookId" class="btn_returnBook">返す</button>
             </form>
              <form method="post" action="reinsertBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook">編集</button>
             </form>
              <form method="post" action="deleteBook">
-                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook">削除</button>
+                <button type="submit" value="${bookDetailsInfo.bookId}"id=delete name="bookId" class="btn_deleteBook">削除</button>
             </form>
-        </div>
-         <div>
-            <c:if test="${!empty lendingMessage}">
-                <div class="error">${lendingMessage}</div>
-            </c:if>
         </div>
     </main>
 </body>
