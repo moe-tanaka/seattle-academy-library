@@ -91,10 +91,10 @@
         </div>
         <div class="edtDelBookBtn_box">
             <form method="post" action="rentBook">
-                <button type="submit" value="${bookDetailsInfo.bookId}"id=rent name="bookId" class="btn_rentBook">借りる</button>
+                <button type="submit" value="${bookDetailsInfo.bookId}" id="rent" name="bookId" class="btn_rentBook">借りる</button>
             </form>
              <form method="post" action="returnBook">
-                <button type="submit" value="${bookDetailsInfo.bookId}"id=return name="bookId" class="btn_returnBook">返す</button>
+                <button type="submit" value="${bookDetailsInfo.bookId}" id="return" name="bookId" class="btn_returnBook">返す</button>
             </form>
              <form method="post" action="reinsertBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook">編集</button>
