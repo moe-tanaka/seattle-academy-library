@@ -58,10 +58,14 @@ public class AccountController {
 
 
         // TODO バリデーションチェック、パスワード一致チェック実装
+        //boolean型はtrueかfalseしか入らない。
+        //入力内容が条件とマッチしているかどうかをチェック
         boolean isEmailValid = email
                 .matches("^([a-zA-Z0-9])+([a-zA-Z0-9\\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\\._-]+)+$");
         boolean isValidPW = password.matches("^[A-Za-z0-9]+$");
         boolean isValidPWOForcheck = passwordForCheck.matches("^[A-Za-z0-9]+$");
+        //if文はtrueの場合のみ実行されるが、falseの時に実行させたい。
+        //どれかがfalseの場合、中身が実行される。
         if (!isEmailValid || !isValidPW || !isValidPWOForcheck) {
             model.addAttribute("errorHalf", "半角英数で入力してください。");
             return "createAccount";
@@ -71,9 +75,12 @@ public class AccountController {
             return "createAccount";
         }
 
+        //userinfoのpasswordにpasswordをセットする
         userInfo.setPassword(password);
+        //userServiceのregistUserメソッドから入力された値をDBに格納する。
         usersService.registUser(userInfo);
 
+        //bookListを表示して、homeに遷移する。
         model.addAttribute("bookList", booksService.getBookList());
         return "home";
     }

@@ -20,11 +20,13 @@ import jp.co.seattle.library.service.UsersService;
 public class LoginController {
     final static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+    //Autwiredするとnewしなくても他のクラスを呼び出せる
     @Autowired
     private BooksService booksService;
     @Autowired
     private UsersService usersService;
 
+    //クライアントからのリクエストに対してメソッドやハンドラをマッピング
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String first(Model model) {
         return "login"; //jspファイル名
@@ -52,8 +54,6 @@ public class LoginController {
             model.addAttribute("errorMessage", "メールアドレスとパスワードが一致しません");
             return "login";
         }
-        
-
 
         // 本の情報を取得して画面側に渡す
         model.addAttribute("bookList", booksService.getBookList());

@@ -42,7 +42,7 @@ public class RentBooksController {
         //貸し出し中か確認する
         if (booksService.isLending(bookId)) {
             model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-            model.addAttribute("lendingMessage", "この本は貸出し中です");
+
             return "details";
         }
 
@@ -73,7 +73,6 @@ public class RentBooksController {
         //貸し出し中か確認する
         if (!(booksService.isLending(bookId))) {
             model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-            model.addAttribute("lendingMessage", "この本は返却済みです");
             return "details";
         }
 

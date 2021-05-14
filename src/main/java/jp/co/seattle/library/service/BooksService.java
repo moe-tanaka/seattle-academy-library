@@ -33,6 +33,7 @@ public class BooksService {
     public List<BookInfo> getBookList() {
 
         // TODO 取得したい情報を取得するようにSQLを修正
+        //BookInfoの内容をlistで返す。jdbcTemplateを用いてタイトルの昇順に並べ、BookInfoRowMapperでマッピングする。
         List<BookInfo> getedBookList = jdbcTemplate.query(
                 "select id,title,author,publisher,publish_date,thumbnail_url from books order by title asc",
                 new BookInfoRowMapper());
