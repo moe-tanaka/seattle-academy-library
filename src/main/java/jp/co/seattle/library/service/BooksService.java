@@ -155,4 +155,18 @@ public class BooksService {
         String sql = "delete from lending where book_id =" + bookId;
         jdbcTemplate.update(sql);
     }
+
+    /**
+     * 書籍を検索する場合
+     * @param searchBook タイトル検索ワード
+     * 
+     */
+    public List<BookInfo> searchBookList(String searchBook) {
+        List<BookInfo> getedBookList = jdbcTemplate.query(
+                "select id,title,author,publisher,publish_date,thumbnail_url from where title like '% " + searchBook + " %'",
+                new BookInfoRowMapper());
+
+        return getedBookList;
+    }
+
 }
