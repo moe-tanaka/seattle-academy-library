@@ -27,25 +27,32 @@
     <main>
         <h1>Home</h1>
         <div>
-        <form action="<%=request.getContextPath()%>/searchBook" method="post">
-        <input type="search" class="search1" id="search" name="searchBook">
-        <a href="<%= request.getContextPath()%>/searchBook" class="search＿box">検索</a>
-        </form>
-        </div>
         <a href="<%= request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a>
-        <a href="<%= request.getContextPath()%>/bulkRegistBook" class="btn_bulk_book">一括登録</a>
+        <a href="<%= request.getContextPath()%>/bulkRegistBook" class="btn_bulk_book">一括登録</a>   
+        <form id="form1" action="<%=request.getContextPath()%>/searchBook">
+        <input type="radio" name="check" value="perfect" checked>完全一致
+        <input type="radio" name="check" value="parts">部分一致
+        <input type="search" class="search1" name="searchBook" placeholder="キーワードを入力">
+        <input type="submit" class=".search_box" id="searchButton" value="検索" />     
+        </form>
+        </div>  
         <div class="content_body">
             <c:if test="${!empty resultMessage}">
                 <div class="error_msg">${resultMessage}</div>
             </c:if>
+              <c:if test="${!empty searchError}">
+                <div class="error_msg">${searchError}</div>
+              </c:if>
             <div>
                 <div class="booklist">
                     <c:forEach var="bookInfo" items="${bookList}">
                         <div class="books">
                             <form method="post" class="book_thumnail" action="<%=request.getContextPath()%>/details">
-                                <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <c:if test="${empty bookInfo.thumbnail}">
+                                <a href="javascript:void(0)" onclick="this.parentNode.submit();">
+                                    <c:if test="${bookInfo.thumbnail == 'null'}">
                                         <img class="book_noimg" src="resources/img/noImg.png">
-                                    </c:if> <c:if test="${!empty bookInfo.thumbnail}">
+                                    </c:if> 
+                                    <c:if test="${bookInfo.thumbnail != 'null'}">
                                         <img class="book_noimg" src="${bookInfo.thumbnail}">
                                     </c:if>
                                 </a> <input type="hidden" name="bookId" value="${bookInfo.bookId}">

@@ -157,16 +157,30 @@ public class BooksService {
     }
 
     /**
-     * 書籍を検索する場合
+     * 書籍を検索する(完全一致)
      * @param searchBook タイトル検索ワード
-     * 
+     * @return 書籍リスト
      */
-    public List<BookInfo> searchBookList(String searchBook) {
-        List<BookInfo> getedBookList = jdbcTemplate.query(
-                "select id,title,author,publisher,publish_date,thumbnail_url from where title like '% " + searchBook + " %'",
+    public List<BookInfo> perfectBookList(String searchBook) {
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where title like '" + searchBook + "' ORDER BY title asc ",
                 new BookInfoRowMapper());
 
-        return getedBookList;
+        return searchedBookList;
     }
+
+    /**
+     * 書籍を検索する(部分一致)
+     * @param searchBook タイトル検索ワード
+     * @return 書籍リスト
+     */
+    public List<BookInfo> partBookList(String searchBook) {
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where title like '%"+ searchBook +"%' ORDER BY title asc ",
+                new BookInfoRowMapper());
+
+        return searchedBookList;
+    }
+
 
 }

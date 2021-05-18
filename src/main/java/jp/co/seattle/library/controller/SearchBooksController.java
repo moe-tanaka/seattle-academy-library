@@ -26,21 +26,37 @@ public class SearchBooksController {
      * 書籍タイトルを検索する
      *
      * @param locale ロケール情報
-     * @param title 書籍名
+     * @param searchBook 検索名
      * @param model モデル情報
      * @return 遷移先画面名
      */
 
     @Transactional
-    @RequestMapping(value = "/searchBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+    @RequestMapping(value = "/searchBook", method = RequestMethod.GET, produces = "text/plain;charset=utf-8")
     public String searchBook(
             Locale locale,
             @RequestParam("searchBook") String searchBook,
+            @RequestParam("check") String check,
             Model model) {
-        logger.info("Welcome rent! The client locale is {}.", locale);
+        logger.info("Welcome search! The client locale is {}.", locale);
 
-        model.addAttribute("bookList", booksService.searchBookList(searchBook));
+        if (check.equals("perfect")) {
+            if (booksService.perfectBookList(searchBook).isEmpty()) {
+                model.addAttribute("searchError", "検索結果がありません。条件を変えてもう一度検索して下さい。");
+            } else {
+                model.addAttribute("bookList", booksService.perfectBookList(searchBook));
+            }
+        } else if (check.equals("parts")) {
+            if (booksService.partBookList(searchBook).isEmpty()) {
+                model.addAttribute("searchError", "検索結果がありません。条件を変えてもう一度検索して下さい。");
+            } else {
+                model.addAttribute("bookList", booksService.partBookList(searchBook));
+            }
+        }
+
         return "home";
     }
 
-}
+    }
+
+
