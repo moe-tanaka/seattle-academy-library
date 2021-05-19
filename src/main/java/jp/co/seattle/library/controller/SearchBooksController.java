@@ -28,6 +28,7 @@ public class SearchBooksController {
      * @param locale ロケール情報
      * @param searchBook 検索名
      * @param model モデル情報
+     * @param check ラジオボタンの入力情報
      * @return 遷移先画面名
      */
 
@@ -43,20 +44,23 @@ public class SearchBooksController {
         if (check.equals("perfect")) {
             if (booksService.perfectBookList(searchBook).isEmpty()) {
                 model.addAttribute("searchError", "検索結果がありません。条件を変えてもう一度検索して下さい。");
-            } else {
-                model.addAttribute("bookList", booksService.perfectBookList(searchBook));
-            }
-        } else if (check.equals("parts")) {
+                return "home";
+            } 
+            model.addAttribute("bookList", booksService.perfectBookList(searchBook));
+            return "home";
+        }
+
+        if (check.equals("parts")) {
             if (booksService.partBookList(searchBook).isEmpty()) {
                 model.addAttribute("searchError", "検索結果がありません。条件を変えてもう一度検索して下さい。");
-            } else {
-                model.addAttribute("bookList", booksService.partBookList(searchBook));
+                return "home";
             }
+            model.addAttribute("bookList", booksService.partBookList(searchBook));
+            return "home";
         }
 
         return "home";
     }
 
-    }
-
+}
 
