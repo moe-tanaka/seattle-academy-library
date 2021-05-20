@@ -70,7 +70,6 @@ public class BooksService {
     }
 
 
-
     /**
      * 書籍を登録する
      *
@@ -155,4 +154,34 @@ public class BooksService {
         String sql = "delete from lending where book_id =" + bookId;
         jdbcTemplate.update(sql);
     }
+
+    /**
+     * 書籍を検索する(完全一致)
+     * @param searchBook タイトル検索ワード
+     * @return 書籍リスト
+     */
+    public List<BookInfo> perfectBookList(String searchBook) {
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where title like '" + searchBook
+                        + "' ORDER BY title asc ",
+                new BookInfoRowMapper());
+
+        return searchedBookList;
+    }
+
+    /**
+     * 書籍を検索する(部分一致)
+     * @param searchBook タイトル検索ワード
+     * @return 書籍リスト
+     */
+    public List<BookInfo> partBookList(String searchBook) {
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where title like '%"
+                        + searchBook + "%' ORDER BY title asc ",
+                new BookInfoRowMapper());
+
+        return searchedBookList;
+    }
+
+
 }
