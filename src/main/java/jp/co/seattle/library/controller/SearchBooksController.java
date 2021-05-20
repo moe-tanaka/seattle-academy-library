@@ -41,6 +41,10 @@ public class SearchBooksController {
             Model model) {
         logger.info("Welcome search! The client locale is {}.", locale);
 
+        if (searchBook.isEmpty()) {
+            model.addAttribute("searchError", "検索結果がありません。条件を変えてもう一度検索して下さい。");
+            return "home";
+        }
         if (check.equals("perfect")) {
             if (booksService.perfectBookList(searchBook).isEmpty()) {
                 model.addAttribute("searchError", "検索結果がありません。条件を変えてもう一度検索して下さい。");

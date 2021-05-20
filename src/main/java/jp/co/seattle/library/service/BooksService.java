@@ -70,7 +70,6 @@ public class BooksService {
     }
 
 
-
     /**
      * 書籍を登録する
      *
@@ -163,7 +162,8 @@ public class BooksService {
      */
     public List<BookInfo> perfectBookList(String searchBook) {
         List<BookInfo> searchedBookList = jdbcTemplate.query(
-                "select id,title,author,publisher,publish_date,thumbnail_url from books where title like '" + searchBook + "' ORDER BY title asc ",
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where title like '" + searchBook
+                        + "' ORDER BY title asc ",
                 new BookInfoRowMapper());
 
         return searchedBookList;
@@ -176,7 +176,8 @@ public class BooksService {
      */
     public List<BookInfo> partBookList(String searchBook) {
         List<BookInfo> searchedBookList = jdbcTemplate.query(
-                "select id,title,author,publisher,publish_date,thumbnail_url from books where title like '%"+ searchBook +"%' ORDER BY title asc ",
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where title like '%"
+                        + searchBook + "%' ORDER BY title asc ",
                 new BookInfoRowMapper());
 
         return searchedBookList;
