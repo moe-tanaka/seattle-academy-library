@@ -69,6 +69,17 @@ public class BooksService {
         return bookDetailsInfo;
     }
 
+    /**
+     * 登録書籍件数を取得する
+     *
+     * @return 登録書籍件数
+     */
+    public int countBook() {
+        String sql = "select count(id) from books";
+        int count = jdbcTemplate.queryForObject(sql, Integer.class);
+        return count;
+    }
+
 
     /**
      * 書籍を登録する
