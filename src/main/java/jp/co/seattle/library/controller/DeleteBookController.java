@@ -43,13 +43,13 @@ public class DeleteBookController {
         //貸し出し可の場合のみ書籍情報を削除
         if (booksService.isLending(bookId)) {
             model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-            model.addAttribute("count", booksService.countBook());
+            model.addAttribute("count", booksService.getBookList().size());
             return "details";
         }
 
         booksService.deleteBook(bookId);
         model.addAttribute("bookList", booksService.getBookList());
-        model.addAttribute("count", booksService.countBook());
+        model.addAttribute("count", booksService.getBookList().size());
         return "home";
     }
 

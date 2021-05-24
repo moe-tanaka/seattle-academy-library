@@ -37,7 +37,6 @@ public class BooksService {
         List<BookInfo> getedBookList = jdbcTemplate.query(
                 "select id,title,author,publisher,publish_date,thumbnail_url from books order by title asc",
                 new BookInfoRowMapper());
-
         return getedBookList;
     }
 
@@ -67,17 +66,6 @@ public class BooksService {
         BookDetailsInfo bookDetailsInfo = jdbcTemplate.queryForObject(sql, new BookDetailsInfoRowMapper());
         bookDetailsInfo.setLending(isLending(bookId));
         return bookDetailsInfo;
-    }
-
-    /**
-     * 登録書籍件数を取得する
-     *
-     * @return 登録書籍件数
-     */
-    public int countBook() {
-        String sql = "select count(id) from books";
-        int count = jdbcTemplate.queryForObject(sql, Integer.class);
-        return count;
     }
 
 

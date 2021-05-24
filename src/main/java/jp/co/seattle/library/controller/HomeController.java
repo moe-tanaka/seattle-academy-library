@@ -28,9 +28,8 @@ public class HomeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String transitionHome(Model model) {
         model.addAttribute("bookList", booksService.getBookList());
-        model.addAttribute("count", booksService.countBook());
+        model.addAttribute("count", booksService.getBookList().size());
         return "home";
     }
-
 
 }

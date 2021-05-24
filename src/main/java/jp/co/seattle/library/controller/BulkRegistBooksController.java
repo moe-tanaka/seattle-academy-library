@@ -38,7 +38,7 @@ public class BulkRegistBooksController {
     @RequestMapping(value = "/bulkRegistBook", method = RequestMethod.GET) //value＝actionで指定したパラメータ
     //RequestParamでname属性を取得
     public String bulkRegistBook(Model model) {
-        model.addAttribute("count", booksService.countBook());
+        model.addAttribute("count", booksService.getBookList().size());
         return "bulkRegistBook";
     }
 
@@ -105,7 +105,7 @@ public class BulkRegistBooksController {
 
             if (errorflag) {
                 model.addAttribute("errorMessage", errorMessage);
-                model.addAttribute("count", booksService.countBook());
+                model.addAttribute("count", booksService.getBookList().size());
                 return "bulkRegistBook";
             }
 
@@ -114,19 +114,19 @@ public class BulkRegistBooksController {
             }
 
             model.addAttribute("complete", "登録完了");
-            model.addAttribute("count", booksService.countBook());
+            model.addAttribute("count", booksService.getBookList().size());
             return "bulkRegistBook";
 
 
         } catch (IOException e) {
             model.addAttribute("errorImport", "CSVファイルを読み込むことが出来ませんでした。");
-            model.addAttribute("count", booksService.countBook());
+            model.addAttribute("count", booksService.getBookList().size());
 
             return "bulkregistBook";
 
         }catch (Exception e) {
             model.addAttribute("errorImport", "CSVファイルを読み込むことが出来ませんでした。");
-            model.addAttribute("count", booksService.countBook());
+            model.addAttribute("count", booksService.getBookList().size());
 
             return "bulkregistBook";
 

@@ -39,8 +39,9 @@ public class DetailsController {
         // デバッグ用ログ
         logger.info("Welcome detailsControler.java! The client locale is {}.", locale);
 
+
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
-        model.addAttribute("count", booksService.countBook());
+        model.addAttribute("count", booksService.getBookList().size());
 
 
         return "details";

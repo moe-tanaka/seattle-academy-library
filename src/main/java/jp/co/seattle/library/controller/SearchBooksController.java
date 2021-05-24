@@ -43,28 +43,28 @@ public class SearchBooksController {
 
         if (searchBook.isEmpty()) {
             model.addAttribute("searchError", "検索結果がありません。条件を変えてもう一度検索して下さい。");
-            model.addAttribute("count", booksService.countBook());
+            model.addAttribute("count", booksService.getBookList().size());
             return "home";
         }
         if (check.equals("perfect")) {
             if (booksService.perfectBookList(searchBook).isEmpty()) {
                 model.addAttribute("searchError", "検索結果がありません。条件を変えてもう一度検索して下さい。");
-                model.addAttribute("count", booksService.countBook());
+                model.addAttribute("count", booksService.getBookList().size());
                 return "home";
             } 
             model.addAttribute("bookList", booksService.perfectBookList(searchBook));
-            model.addAttribute("count", booksService.countBook());
+            model.addAttribute("count", booksService.getBookList().size());
             return "home";
         }
 
         if (check.equals("parts")) {
             if (booksService.partBookList(searchBook).isEmpty()) {
                 model.addAttribute("searchError", "検索結果がありません。条件を変えてもう一度検索して下さい。");
-                model.addAttribute("count", booksService.countBook());
+                model.addAttribute("count", booksService.getBookList().size());
                 return "home";
             }
             model.addAttribute("bookList", booksService.partBookList(searchBook));
-            model.addAttribute("count", booksService.countBook());
+            model.addAttribute("count", booksService.getBookList().size());
             return "home";
         }
 
