@@ -38,6 +38,7 @@
                   
             <ul>
                         
+                <li>現在の登録件数は${count}冊です。</li>
                 <li><a href="<%=request.getContextPath()%>/home" class="menu">Home</a></li>         
                 <li><a href="<%=request.getContextPath()%>/">ログアウト</a></li>       
             </ul>

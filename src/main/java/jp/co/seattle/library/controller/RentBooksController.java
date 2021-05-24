@@ -42,6 +42,7 @@ public class RentBooksController {
         //貸し出し中か確認する
         if (booksService.isLending(bookId)) {
             model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+            model.addAttribute("count", booksService.getBookList().size());
 
             return "details";
         }
@@ -50,6 +51,7 @@ public class RentBooksController {
         booksService.rentBook(bookId);
 
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+        model.addAttribute("count", booksService.getBookList().size());
         return "details";
 
     }
@@ -73,6 +75,7 @@ public class RentBooksController {
         //貸し出し中か確認する
         if (!(booksService.isLending(bookId))) {
             model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+            model.addAttribute("count", booksService.getBookList().size());
             return "details";
         }
 
@@ -80,6 +83,7 @@ public class RentBooksController {
         booksService.returnBook(bookId);
 
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
+        model.addAttribute("count", booksService.getBookList().size());
         return "details";
 
     }

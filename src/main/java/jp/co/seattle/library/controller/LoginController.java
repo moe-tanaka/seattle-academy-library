@@ -57,6 +57,7 @@ public class LoginController {
 
         // 本の情報を取得して画面側に渡す
         model.addAttribute("bookList", booksService.getBookList());
+        model.addAttribute("count", booksService.getBookList().size());
         return "home";
 
     }

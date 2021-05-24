@@ -34,6 +34,7 @@ public class AddBooksController {
     @RequestMapping(value = "/addBook", method = RequestMethod.GET) //value＝actionで指定したパラメータ
     //RequestParamでname属性を取得
     public String login(Model model) {
+        model.addAttribute("count", booksService.getBookList().size());
         return "addBook";
     }
 
@@ -112,7 +113,7 @@ public class AddBooksController {
 
         // TODO 登録した書籍の詳細情報を表示するように実装
         model.addAttribute("bookDetailsInfo", booksService.getBookInfo(booksService.getBookid()));
-
+        model.addAttribute("count", booksService.getBookList().size());
         return "details";
     }
 

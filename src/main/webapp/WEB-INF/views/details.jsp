@@ -25,6 +25,7 @@
         </div>
         <div class="right">
             <ul>
+                <li>現在の登録件数は${count}冊です。</li>
                 <li><a href="<%= request.getContextPath()%>/home" class="menu">Home</a></li>
                 <li><a href="<%= request.getContextPath()%>/">ログアウト</a></li>
             </ul>
@@ -36,17 +37,14 @@
             <div class="content_left">
                 <span>書籍の画像</span>
                 <div class="book_thumnail">
-                    <a href="${bookDetailsInfo.thumbnailUrl}" data-lightbox="image-1">
-                     <c:if test="${bookDetailsInfo.thumbnailUrl == 'null'}">
+                    <a href="${bookDetailsInfo.thumbnailUrl}" data-lightbox="image-1"> <c:if test="${bookDetailsInfo.thumbnailUrl == 'null'}">
                             <img class="book_noimg" src="resources/img/noImg.png">
-                     </c:if> 
-                     <c:if test="${bookDetailsInfo.thumbnailUrl != 'null'}">
+                        </c:if> <c:if test="${bookDetailsInfo.thumbnailUrl != 'null'}">
                             <img class="book_noimg" src="${bookDetailsInfo.thumbnailUrl}">
-                     </c:if> 
-                     <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
+                        </c:if> <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
                     </a>
                 </div>
-                    <c:choose>
+                <c:choose>
                     <c:when test="${bookDetailsInfo.lending}">
                         <p id=status>貸出し中</p>
                     </c:when>
@@ -61,7 +59,7 @@
                         <div class="error">${errorDate}</div>
                     </c:if>
                 </div>
-                 <div>
+                <div>
                     <c:if test="${!empty errorIsbn}">
                         <div class="error">${errorIsbn}</div>
                     </c:if>
@@ -96,13 +94,13 @@
             <form method="post" action="rentBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" id="rent" name="bookId" class="btn_rentBook">借りる</button>
             </form>
-             <form method="post" action="returnBook">
+            <form method="post" action="returnBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" id="return" name="bookId" class="btn_returnBook">返す</button>
             </form>
-             <form method="post" action="reinsertBook">
+            <form method="post" action="reinsertBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook">編集</button>
             </form>
-             <form method="post" action="deleteBook">
+            <form method="post" action="deleteBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" id="delete" name="bookId" class="btn_deleteBook">削除</button>
             </form>
         </div>
