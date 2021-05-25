@@ -44,14 +44,12 @@
                         </c:if> <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
                     </a>
                 </div>
-                <c:choose>
-                    <c:when test="${bookDetailsInfo.lending}">
-                        <p id=status>貸出し中</p>
-                    </c:when>
-                    <c:otherwise>
-                        <p id=status>貸出し可</p>
-                    </c:otherwise>
-                </c:choose>
+                    <c:if test="${bookDetailsInfo.lending == true}">
+                        <p class="status" id="status">貸出し中</p>
+                    </c:if>
+                    <c:if test="${bookDetailsInfo.lending == false}">
+                        <p class="status" id="status">貸出し可</p>
+                    </c:if>
             </div>
             <div class="content_right">
                 <div>

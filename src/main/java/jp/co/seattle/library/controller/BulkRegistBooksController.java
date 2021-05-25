@@ -55,6 +55,12 @@ public class BulkRegistBooksController {
             Model model) {
         logger.info("Welcome insertBooksbulk.java! The client locale is {}.", locale);
 
+        
+        if (file.isEmpty()) {
+            model.addAttribute("errorImport", "CSVファイルを読み込むことが出来ませんでした。");
+            model.addAttribute("count", booksService.getBookList().size());
+            return "bulkRegistBook";
+        }
 
         try (InputStream csv = file.getInputStream();
                 Reader reader = new InputStreamReader(csv);
@@ -112,6 +118,7 @@ public class BulkRegistBooksController {
             for (BookDetailsInfo book : bookcsv) {
                 booksService.registBook(book);
             }
+            
 
             model.addAttribute("complete", "登録完了");
             model.addAttribute("count", booksService.getBookList().size());

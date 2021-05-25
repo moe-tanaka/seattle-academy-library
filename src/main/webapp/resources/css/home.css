@@ -70,7 +70,7 @@ input {
 	margin-left: -5px;
 }
 
-.searchForm{
+.searchForm {
 	margin-top: 10px;
 }
 
@@ -336,4 +336,33 @@ hr.border_add {
 
 .bulk_form .caution p {
 	color: #fa8072;
+}
+
+.caution p{
+	margin-top: 10px;
+
+}
+
+.complete {
+	margin-top: 10px;
+	display: block;
+	margin: 10px 0;
+	padding: 10px;
+	font-weight: bold;
+	color: #0084ff;
+	border: solid 1px #0084ff;
+	border-radius: 0.2em;
+	background: #cce6ff;
+}
+
+.status {
+	font-size:20px;
+	background: #cce6ff;
+	border: solid 1px #0084ff;
+	border-radius: 0.2em;
+	margin: 10px 0;
+	padding: 10px;
+	width:180px;
+	text-align:center;
+	
 }
