@@ -65,6 +65,9 @@
                         <c:if test="${!empty errorImport}">
                             <div class="error">${errorImport}</div>
                         </c:if>
+                         <c:if test="${!empty complete}">
+                            <div class="complete">${complete}</div>
+                        </c:if>
                     </p>
                 </div>
                 <div class="addBookBtn_box">

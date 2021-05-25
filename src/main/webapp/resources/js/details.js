@@ -1,16 +1,18 @@
 $(function(){
-		$(status).ready(function(){
-			var status = ("#status").text();
-			
-			if(status == "貸し出し中"){
-				$("#rent").prop("disabled", true);
-				$("#delete").prop("disabled", true);
-				 
+		var $status = $("#status").text();
+		if($status == "貸出し中"){
+			$("#delete").hide();
+			$("#rent").hide();
+		}
+		
+		var $status = $("#status").text();
+		if($status == "貸出し可"){
+			$("#return").hide();
+		}
+    	
+		$("#delete").click(function(){
+			if (!confirm('書籍情報を削除してもよろしいですか？')) {
+			return false;
 			}
-			if(status == "貸し出し可"){
-				$("#return").prop("disabled", true);	
-			}
-			
-		//$(error).on(function(){
 })
 });
