@@ -23,7 +23,6 @@ public class DeleteBookController {
     @Autowired
     private BooksService booksService;
 
-
     /**
      * 対象書籍を削除する
      *
@@ -53,4 +52,31 @@ public class DeleteBookController {
         return "home";
     }
 
+    /**
+     * 選択した書籍を一括削除
+     * @param locale
+     * @param 削除したい書籍のリスト
+     * @param model
+     * @return ホーム画面に遷移
+     */
+    @Transactional
+    @RequestMapping(value = "/deleteSelectBook", method = RequestMethod.POST)
+    public String deleteSelectBooksBulk(
+            Locale locale,
+            @RequestParam("bookList") Integer[] bookList,
+            Model model) {
+        logger.info("Welcome deleteBulk! The client locale is {}.", locale);
+        
+        
+        for (int bookId : bookList) {
+            if (!booksService.isLending(bookId)) {
+                booksService.deleteBook(bookId);
+        }
+        }
+        model.addAttribute("bookList", booksService.getBookList());
+        model.addAttribute("count", booksService.getBookList().size());
+        return "home";
+        
+        
+}
 }

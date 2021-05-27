@@ -10,6 +10,8 @@
 <link href="<c:url value="/resources/css/default.css" />" rel="stylesheet" type="text/css">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="resources/js/home.js" /></script>
 </head>
 <body class="wrapper">
     <header>
@@ -28,8 +30,19 @@
     <main>
         <h1>Home</h1>
         <div>
-            <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkRegistBook" class="btn_bulk_book">一括登録</a>
+            <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> 
+            <a href="<%=request.getContextPath()%>/bulkRegistBook" class="btn_bulk_book">一括登録</a>
+            <form method="post" action="deleteSelectBook">
+                <button type="submit" id="allDeleteBook" name="allDeleteBook" class="btn_rentBook">一括削除</button>
+                <input type="checkbox" id="all" value=all>一括選択
+                <input type="hidden" name="bookList" id="bookList" value="a">
+            </form>
             <form class="searchForm" id="form1" action="<%=request.getContextPath()%>/searchBook">
+                <select name="searchSelect">
+                <option value="title">書籍名</option>
+                <option value="author">著者名</option>
+                <option value="publisher">出版社名</option>
+                </select>
                 <input type="radio" name="check" value="perfect" checked>完全一致 
                 <input type="radio" name="check" value="parts">部分一致 
                 <input type="search" class="search1" name="searchBook" placeholder="キーワードを入力"> 
@@ -50,13 +63,19 @@
                 <div class="booklist">
                     <c:forEach var="bookInfo" items="${bookList}">
                         <div class="books">
+                                <form>
+                                <input type="checkbox" name="checkbox" id="checkbox" value="${bookInfo.bookId}">削除
+                                </form>
                             <form method="post" class="book_thumnail" action="<%=request.getContextPath()%>/details">
-                                <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <c:if test="${bookInfo.thumbnail == 'null'}">
+                                <a href="javascript:void(0)" onclick="this.parentNode.submit();"> 
+                                    <c:if test="${bookInfo.thumbnail == 'null'}">
                                         <img class="book_noimg" src="resources/img/noImg.png">
-                                    </c:if> <c:if test="${bookInfo.thumbnail != 'null'}">
+                                    </c:if>
+                                     <c:if test="${bookInfo.thumbnail != 'null'}">
                                         <img class="book_noimg" src="${bookInfo.thumbnail}">
                                     </c:if>
-                                </a> <input type="hidden" name="bookId" value="${bookInfo.bookId}">
+                                </a> 
+                                <input type="hidden" name="bookId" value="${bookInfo.bookId}">
                             </form>
                             <ul>
                                 <li class="book_title">${bookInfo.title}</li>
