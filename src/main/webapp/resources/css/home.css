@@ -104,6 +104,7 @@ input {
 .books {
 	display: inline-block;
 	margin-right: 10px;
+	margin-bottom: 30px;
 	line-height: 1.5;
 }
 
@@ -163,7 +164,7 @@ img.book_img {
 	white-space: nowrap;
 }
 
-a.btn_add_book, a.btn_bulk_book, button.btn_addBook, button.btn_editBook,
+a.btn_add_book, a.btn_bulk_book, a.btn_AllDelete_book, button.btn_addBook, button.btn_editBook,
 	button.btn_deleteBook, button.btn_rentBook, button.btn_returnBook,
 	button.btn_bulkRegist {
 	display: inline-block;
@@ -182,6 +183,10 @@ a.btn_add_book, a.btn_bulk_book, button.btn_addBook, button.btn_editBook,
 
 a.btn_bulk_book {
 	background-color: #66cdaa;
+}
+
+a.btn_AllDelete_book{
+	background-color:#f08080
 }
 
 button.btn_editBook {

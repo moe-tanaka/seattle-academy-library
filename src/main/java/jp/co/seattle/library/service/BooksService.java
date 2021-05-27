@@ -155,7 +155,7 @@ public class BooksService {
     }
 
     /**
-     * 書籍を検索する(完全一致)
+     * 書籍を書籍名で検索する(完全一致)
      * @param searchBook タイトル検索ワード
      * @return 書籍リスト
      */
@@ -169,13 +169,71 @@ public class BooksService {
     }
 
     /**
-     * 書籍を検索する(部分一致)
+     * 書籍を書籍名で検索する(部分一致)
      * @param searchBook タイトル検索ワード
      * @return 書籍リスト
      */
     public List<BookInfo> partBookList(String searchBook) {
         List<BookInfo> searchedBookList = jdbcTemplate.query(
                 "select id,title,author,publisher,publish_date,thumbnail_url from books where title like '%"
+                        + searchBook + "%' ORDER BY title asc ",
+                new BookInfoRowMapper());
+
+        return searchedBookList;
+    }
+
+    /**
+     * 書籍を著者名で検索する(完全一致)
+     * @param searchBook タイトル検索ワード
+     * @return 書籍リスト
+     */
+    public List<BookInfo> perfectBookListAuthor(String searchBook) {
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where author like '"
+                        + searchBook
+                        + "' ORDER BY title asc ",
+                new BookInfoRowMapper());
+
+        return searchedBookList;
+    }
+
+    /**
+     * 書籍を著者名で検索する(部分一致)
+     * @param searchBook タイトル検索ワード
+     * @return 書籍リスト
+     */
+    public List<BookInfo> partBookListAuthor(String searchBook) {
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where author like '%"
+                        + searchBook + "%' ORDER BY title asc ",
+                new BookInfoRowMapper());
+
+        return searchedBookList;
+    }
+
+    /**
+     * 書籍を出版社名で検索する(完全一致)
+     * @param searchBook タイトル検索ワード
+     * @return 書籍リスト
+     */
+    public List<BookInfo> perfectBookListPublisher(String searchBook) {
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where publisher like '"
+                        + searchBook
+                        + "' ORDER BY title asc ",
+                new BookInfoRowMapper());
+
+        return searchedBookList;
+    }
+
+    /**
+     * 書籍を出版社名で検索する(部分一致)
+     * @param searchBook タイトル検索ワード
+     * @return 書籍リスト
+     */
+    public List<BookInfo> partBookListPublisher(String searchBook) {
+        List<BookInfo> searchedBookList = jdbcTemplate.query(
+                "select id,title,author,publisher,publish_date,thumbnail_url from books where publisher like '%"
                         + searchBook + "%' ORDER BY title asc ",
                 new BookInfoRowMapper());
 

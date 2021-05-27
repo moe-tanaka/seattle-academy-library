@@ -13,6 +13,8 @@ $(function(){
 		$("#delete").click(function(){
 			if (!confirm('書籍情報を削除してもよろしいですか？')) {
 			return false;
+			
 			}
+		
 })
 });
